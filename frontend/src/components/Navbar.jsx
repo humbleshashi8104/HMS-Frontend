@@ -11,11 +11,11 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     await axios
-      .get("http://localhost:4000/api/v1/user/patient/logout", {
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/patient/logout`, {
         withCredentials: true,
       })
       .then((res) => {
-        toast.success(res.data.message);
+        toast.success(res?.data?.message);
         setIsAuthenticated(false);
       })
       .then(()=>{
@@ -25,7 +25,7 @@ const Navbar = () => {
         navigateTo('/login')
       })
       .catch((err) => {
-        toast.error(err.response.data.message);
+        toast.error(err?.response?.data?.message);
       });
 
 

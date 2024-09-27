@@ -21,7 +21,7 @@ const Register = () => {
     try {
       await axios
         .post(
-          "http://localhost:4000/api/v1/user/patient/register",
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/user/patient/register`,
           { firstName, lastName, email, dob, gender, password },
           {
             withCredentials: true,
@@ -29,7 +29,7 @@ const Register = () => {
           }
         )
         .then((res) => {
-          toast.success(res.data.message);
+          toast.success(res?.data?.message);
           setIsAuthenticated(true);
           navigateTo("/login");
           setFirstName("");
@@ -40,7 +40,7 @@ const Register = () => {
           setPassword("");
         });
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error?.response?.data?.message);
     }
   };
 

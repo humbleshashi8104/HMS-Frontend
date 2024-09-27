@@ -44,11 +44,11 @@ const AppointmentForm = () => {
   useEffect(() => {
     const fetchDoctors = async () => {
       const { data } = await axios.get(
-        "http://localhost:4000/api/v1/user/doctors",
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/user/doctors`,
         { withCredentials: true }
       );
-      setDoctors(data.doctors);
-      console.log(data.doctors);
+      setDoctors(data?.doctors);
+      console.log(data?.doctors);
     };
     fetchDoctors();
   }, []);
@@ -57,7 +57,7 @@ const AppointmentForm = () => {
     try {
       const hasVisitedBool = Boolean(hasVisited);
       const { data } = await axios.post(
-        "http://localhost:4000/api/v1/appointment/post",
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/appointment/post`,
         {
           firstName,
           lastName,
@@ -78,7 +78,7 @@ const AppointmentForm = () => {
           headers: { "Content-Type": "application/json" },
         }
       );
-      toast.success(data.message);
+      toast.success(data?.message);
       setFirstName(""),
         setLastName(""),
         setEmail(""),
@@ -93,7 +93,7 @@ const AppointmentForm = () => {
         setHasVisited(""),
         setAddress("");
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error?.response?.data?.message);
     }
   };
   // console.log(isAuthenticated)

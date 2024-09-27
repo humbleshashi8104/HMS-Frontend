@@ -16,9 +16,10 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
+      console.log(import.meta.env.VITE_BACKEND_URL);
       await axios
         .post(
-          "http://localhost:4000/api/v1/user/login",
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/user/login`,
           { email, password, role: "Patient" },
           {
             withCredentials: true,
@@ -26,7 +27,7 @@ const Login = () => {
           }
         )
         .then((res) => {
-          toast.success(res.data.message);
+          toast.success(res?.data?.message);
           setIsAuthenticated(true);
           console.log("here")
           navigateTo("/");
@@ -35,7 +36,7 @@ const Login = () => {
           // setConfirmPassword("");
         });
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error?.response?.data?.message);
     }
   };
 

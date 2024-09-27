@@ -19,21 +19,23 @@ const App = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
+        console.log(import.meta.env.VITE_BACKEND_URL);
         const response = await axios.get(
-          "http://localhost:4000/api/v1/user/patient/me",
+          
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/user/patient/me`,
           {
             withCredentials: true,
           }
         );
         setIsAuthenticated(true);
-        setUser(response.data.user);
+        setUser(response?.data?.user);
       } catch (error) {
         setIsAuthenticated(false);
         setUser({});
       }
     };
     fetchUser();
-  }, [isAuthenticated]);
+  }, []);
 
   return (
     <>
